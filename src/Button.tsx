@@ -57,8 +57,8 @@ interface ButtonProps {
     endIconPaths?: string[];
     endIconSize?: number;
     hasShadow?: boolean;
-    style?: React.CSSProperties;
-    titleStyle?: React.CSSProperties;
+    styles?: React.CSSProperties;
+    titleStyles?: React.CSSProperties;
     size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
@@ -84,8 +84,8 @@ const Button: React.FC<ButtonProps> = ({
     endIconPaths,
     endIconSize,
     hasShadow = true,
-    style,
-    titleStyle,
+    styles,
+    titleStyles,
     size = "md",
 }) => {
     const [isPressed, setIsPressed] = useState(false);
@@ -102,7 +102,7 @@ const Button: React.FC<ButtonProps> = ({
         }
     };
 
-    const iconSize = sizeStyles[size].iconSize;
+    const iconSize = sizeStyles[size]?.iconSize;
 
     // Resuelve el color de fondo para el botón
     const resolvedColor = color in colors ? colors[color as keyof typeof colors] : color;
@@ -120,7 +120,7 @@ const Button: React.FC<ButtonProps> = ({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        padding: sizeStyles[size].padding,
+        padding: sizeStyles[size]?.padding,
         borderRadius: `${borderRadius}px`,
         border: type === "outline" ? `2px solid ${resolvedColor}` : "none",
         backgroundColor: type === "solid" ? resolvedColor : "transparent",
@@ -135,19 +135,20 @@ const Button: React.FC<ButtonProps> = ({
         transition: "all 0.2s ease-in-out",
         opacity: disabled ? 0.6 : 1,
         boxSizing: "border-box",
-        ...style,
+        ...styles,
     };
 
     const textStyles: React.CSSProperties = {
-        fontSize: sizeStyles[size].fontSize,
+        fontSize: sizeStyles[size]?.fontSize,
         margin: "0 8px",
         color: contentColor,
-        ...titleStyle,
+        ...titleStyles,
     };
 
     return (
         <Touchable onClick={onClick} style={buttonStyles}>
             <button
+                onClick={(e) => e.preventDefault()}
                 onMouseDown={handlePressStart} // Escritorio
                 onMouseUp={handlePressEnd} // Escritorio
                 onMouseLeave={handlePressEnd} // Escritorio
