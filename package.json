@@ -1,6 +1,6 @@
 {
   "name": "@precooked/react-button",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Componente reutilizable para proyectos React",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
