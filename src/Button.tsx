@@ -62,7 +62,7 @@ interface ButtonProps {
     size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
-const sizeStyle = {
+const sizeStyles = {
     xs: { padding: "4px", fontSize: "10px", iconSize: 12 },
     sm: { padding: "6px", fontSize: "12px", iconSize: 16 },
     md: { padding: "10px", fontSize: "16px", iconSize: 24 }, // Tamaño por defecto
@@ -102,7 +102,7 @@ const Button: React.FC<ButtonProps> = ({
         }
     };
 
-    const iconSize = sizeStyle[size]?.iconSize;
+    const iconSize = sizeStyles[size]?.iconSize;
 
     // Resuelve el color de fondo para el botón
     const resolvedColor = color in colors ? colors[color as keyof typeof colors] : color;
@@ -120,7 +120,7 @@ const Button: React.FC<ButtonProps> = ({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        padding: sizeStyle[size]?.padding,
+        padding: sizeStyles[size]?.padding,
         borderRadius: `${borderRadius}px`,
         border: type === "outline" ? `2px solid ${resolvedColor}` : "none",
         backgroundColor: type === "solid" ? resolvedColor : "transparent",
@@ -139,7 +139,7 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     const textStyle: React.CSSProperties = {
-        fontSize: sizeStyle[size]?.fontSize,
+        fontSize: sizeStyles[size]?.fontSize,
         margin: "0 8px",
         color: contentColor,
         ...titleStyle,
