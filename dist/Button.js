@@ -46,7 +46,7 @@ var resolveIcon = function (icon, paths, size, color) {
     }
     return null;
 };
-var sizeStyles = {
+var sizeStyle = {
     xs: { padding: "4px", fontSize: "10px", iconSize: 12 },
     sm: { padding: "6px", fontSize: "12px", iconSize: 16 },
     md: { padding: "10px", fontSize: "16px", iconSize: 24 }, // Tamaño por defecto
@@ -54,8 +54,9 @@ var sizeStyles = {
     xl: { padding: "18px", fontSize: "22px", iconSize: 40 },
 };
 var Button = function (_a) {
-    var title = _a.title, onClick = _a.onClick, _b = _a.color, color = _b === void 0 ? "primary" : _b, _c = _a.borderRadius, borderRadius = _c === void 0 ? 4 : _c, _d = _a.type, type = _d === void 0 ? "solid" : _d, _e = _a.disabled, disabled = _e === void 0 ? false : _e, startIcon = _a.startIcon, startIconPaths = _a.startIconPaths, startIconSize = _a.startIconSize, endIcon = _a.endIcon, endIconPaths = _a.endIconPaths, endIconSize = _a.endIconSize, _f = _a.hasShadow, hasShadow = _f === void 0 ? true : _f, style = _a.style, titleStyle = _a.titleStyle, _g = _a.size, size = _g === void 0 ? "md" : _g;
-    var _h = useState(false), isPressed = _h[0], setIsPressed = _h[1];
+    var _b, _c, _d;
+    var title = _a.title, onClick = _a.onClick, _e = _a.color, color = _e === void 0 ? "primary" : _e, _f = _a.borderRadius, borderRadius = _f === void 0 ? 4 : _f, _g = _a.type, type = _g === void 0 ? "solid" : _g, _h = _a.disabled, disabled = _h === void 0 ? false : _h, startIcon = _a.startIcon, startIconPaths = _a.startIconPaths, startIconSize = _a.startIconSize, endIcon = _a.endIcon, endIconPaths = _a.endIconPaths, endIconSize = _a.endIconSize, _j = _a.hasShadow, hasShadow = _j === void 0 ? true : _j, style = _a.styles, titleStyle = _a.titleStyle, _k = _a.size, size = _k === void 0 ? "md" : _k;
+    var _l = useState(false), isPressed = _l[0], setIsPressed = _l[1];
     var handlePressStart = function () {
         if (!disabled) {
             setIsPressed(true);
@@ -66,7 +67,7 @@ var Button = function (_a) {
             setIsPressed(false);
         }
     };
-    var iconSize = sizeStyles[size].iconSize;
+    var iconSize = (_b = sizeStyle[size]) === null || _b === void 0 ? void 0 : _b.iconSize;
     // Resuelve el color de fondo para el botón
     var resolvedColor = color in colors ? colors[color] : color;
     // Determina el color del título e iconos según el fondo
@@ -75,14 +76,14 @@ var Button = function (_a) {
             ? "#fff"
             : colors.textShade
         : resolvedColor; // En los demás casos, usa el color del texto y los iconos
-    var buttonStyles = __assign({ display: "inline-flex", justifyContent: "center", alignItems: "center", flexDirection: "row", padding: sizeStyles[size].padding, borderRadius: "".concat(borderRadius, "px"), border: type === "outline" ? "2px solid ".concat(resolvedColor) : "none", backgroundColor: type === "solid" ? resolvedColor : "transparent", color: contentColor, boxShadow: hasShadow
+    var buttonStyle = __assign({ display: "inline-flex", justifyContent: "center", alignItems: "center", flexDirection: "row", padding: (_c = sizeStyle[size]) === null || _c === void 0 ? void 0 : _c.padding, borderRadius: "".concat(borderRadius, "px"), border: type === "outline" ? "2px solid ".concat(resolvedColor) : "none", backgroundColor: type === "solid" ? resolvedColor : "transparent", color: contentColor, boxShadow: hasShadow
             ? isPressed
                 ? "none"
                 : "0px 2px 5px rgba(0, 0, 0, 0.2)"
-            : "none", transform: isPressed ? "scale(0.98)" : "scale(1)", cursor: disabled ? "not-allowed" : "pointer", transition: "all 0.2s ease-in-out", opacity: disabled ? 0.6 : 1, boxSizing: "border-box" }, style);
-    var textStyles = __assign({ fontSize: sizeStyles[size].fontSize, margin: "0 8px", color: contentColor }, titleStyle);
-    return (React.createElement(Touchable, { onClick: onClick, style: buttonStyles },
-        React.createElement("button", { onMouseDown: handlePressStart, onMouseUp: handlePressEnd, onMouseLeave: handlePressEnd, onTouchStart: handlePressStart, onTouchEnd: handlePressEnd, style: {
+            : "none", transform: isPressed ? "scale(0.98)" : "scale(1)", cursor: disabled ? "not-allowed" : "pointer", transition: "all 0.2s ease-in-out", opacity: disabled ? 0.6 : 1, boxSizing: "border-box" }, styles);
+    var textStyle = __assign({ fontSize: (_d = sizeStyle[size]) === null || _d === void 0 ? void 0 : _d.fontSize, margin: "0 8px", color: contentColor }, titleStyle);
+    return (React.createElement(Touchable, { onClick: onClick, style: buttonStyle },
+        React.createElement("button", { onClick: function (e) { return e.preventDefault(); }, onMouseDown: handlePressStart, onMouseUp: handlePressEnd, onMouseLeave: handlePressEnd, onTouchStart: handlePressStart, onTouchEnd: handlePressEnd, style: {
                 border: "none",
                 backgroundColor: "transparent",
                 width: "100%",
@@ -95,7 +96,7 @@ var Button = function (_a) {
             }, disabled: disabled },
             resolveIcon(startIcon, startIconPaths, startIconSize !== null && startIconSize !== void 0 ? startIconSize : iconSize, contentColor // El color del icono cambia dependiendo del fondo
             ),
-            React.createElement("span", { style: textStyles }, title),
+            React.createElement("span", { style: textStyle }, title),
             resolveIcon(endIcon, endIconPaths, endIconSize !== null && endIconSize !== void 0 ? endIconSize : iconSize, contentColor // El color del icono cambia dependiendo del fondo
             ))));
 };

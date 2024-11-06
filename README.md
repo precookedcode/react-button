@@ -28,8 +28,8 @@ npm install @precooked/react-button
 | `endIconPaths`   | `string[]`            | `undefined` | Custom SVG paths for the end icon.                                          |
 | `endIconSize`    | `number`              | `undefined` | Custom size for the end icon.                                               |
 | `hasShadow`      | `boolean`             | `true`      | Whether the button has a shadow or not.                                     |
-| `styles`         | `React.CSSProperties` | `undefined` | Custom styles for the button container.                                     |
-| `titleStyles`    | `React.CSSProperties` | `undefined` | Custom styles for the title text.                                           |
+| `style`         | `React.CSSProperties` | `undefined` | Custom style for the button container.                                     |
+| `titleStyle`    | `React.CSSProperties` | `undefined` | Custom style for the title text.                                           |
 | `size`           | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `'md'`     | The size of the button, affecting padding and font-size.                    |
 
 ## Example Usage

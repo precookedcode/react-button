@@ -57,12 +57,12 @@ interface ButtonProps {
     endIconPaths?: string[];
     endIconSize?: number;
     hasShadow?: boolean;
-    styles?: React.CSSProperties;
-    titleStyles?: React.CSSProperties;
+    style?: React.CSSProperties;
+    titleStyle?: React.CSSProperties;
     size?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
-const sizeStyles = {
+const sizeStyle = {
     xs: { padding: "4px", fontSize: "10px", iconSize: 12 },
     sm: { padding: "6px", fontSize: "12px", iconSize: 16 },
     md: { padding: "10px", fontSize: "16px", iconSize: 24 }, // Tamaño por defecto
@@ -84,8 +84,8 @@ const Button: React.FC<ButtonProps> = ({
     endIconPaths,
     endIconSize,
     hasShadow = true,
-    styles,
-    titleStyles,
+    style,
+    titleStyle,
     size = "md",
 }) => {
     const [isPressed, setIsPressed] = useState(false);
@@ -102,7 +102,7 @@ const Button: React.FC<ButtonProps> = ({
         }
     };
 
-    const iconSize = sizeStyles[size]?.iconSize;
+    const iconSize = sizeStyle[size]?.iconSize;
 
     // Resuelve el color de fondo para el botón
     const resolvedColor = color in colors ? colors[color as keyof typeof colors] : color;
@@ -115,12 +115,12 @@ const Button: React.FC<ButtonProps> = ({
                 : colors.textShade
             : resolvedColor; // En los demás casos, usa el color del texto y los iconos
 
-    const buttonStyles: React.CSSProperties = {
+    const buttonStyle: React.CSSProperties = {
         display: "inline-flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        padding: sizeStyles[size]?.padding,
+        padding: sizeStyle[size]?.padding,
         borderRadius: `${borderRadius}px`,
         border: type === "outline" ? `2px solid ${resolvedColor}` : "none",
         backgroundColor: type === "solid" ? resolvedColor : "transparent",
@@ -135,18 +135,18 @@ const Button: React.FC<ButtonProps> = ({
         transition: "all 0.2s ease-in-out",
         opacity: disabled ? 0.6 : 1,
         boxSizing: "border-box",
-        ...styles,
+        ...style,
     };
 
-    const textStyles: React.CSSProperties = {
-        fontSize: sizeStyles[size]?.fontSize,
+    const textStyle: React.CSSProperties = {
+        fontSize: sizeStyle[size]?.fontSize,
         margin: "0 8px",
         color: contentColor,
-        ...titleStyles,
+        ...titleStyle,
     };
 
     return (
-        <Touchable onClick={onClick} style={buttonStyles}>
+        <Touchable onClick={onClick} style={buttonStyle}>
             <button
                 onClick={(e) => e.preventDefault()}
                 onMouseDown={handlePressStart} // Escritorio
@@ -173,7 +173,7 @@ const Button: React.FC<ButtonProps> = ({
                     startIconSize ?? iconSize,
                     contentColor // El color del icono cambia dependiendo del fondo
                 )}
-                <span style={textStyles}>{title}</span>
+                <span style={textStyle}>{title}</span>
                 {resolveIcon(
                     endIcon,
                     endIconPaths,
