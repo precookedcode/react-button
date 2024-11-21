@@ -60,6 +60,7 @@ interface ButtonProps {
     style?: React.CSSProperties;
     titleStyle?: React.CSSProperties;
     size?: "xs" | "sm" | "md" | "lg" | "xl";
+    className?: string;
 }
 
 const sizeStyles = {
@@ -87,6 +88,7 @@ const Button: React.FC<ButtonProps> = ({
     style,
     titleStyle,
     size = "md",
+    className = "precooked-button",
 }) => {
     const [isPressed, setIsPressed] = useState(false);
 
@@ -146,7 +148,7 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     return (
-        <Touchable onClick={onClick} style={buttonStyle}>
+        <Touchable className={className} onClick={onClick} style={buttonStyle}>
             <button
                 onClick={(e) => e.preventDefault()}
                 onMouseDown={handlePressStart} // Escritorio
